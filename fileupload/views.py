@@ -7,6 +7,7 @@ from django.template.loader import render_to_string
 def home(request):
     message = "Enter CSV or Excel only"
     if request.method == 'POST':
+        recipient = request.POST.get('email')
         file = request.FILES['file']
         if str(file).endswith('.xlsx') or str(file).endswith('.csv'):
             file_obj = File.objects.create(file = file)
@@ -25,9 +26,9 @@ def home(request):
                 'html_table':html_table,
             }
 
-            subject = 'DataFrame as Email Body'
-            email_from = 'your_email@example.com'
-            recipient_list = ['recipient@example.com']
+            subject = 'Python(Django) Assignment - Om Jaiswal'
+            email_from = 'work.omjaiswal@gmail.com'
+            recipient_list = [recipient]
 
             # Render email template with DataFrame HTML content
             email_template = 'data.html'
